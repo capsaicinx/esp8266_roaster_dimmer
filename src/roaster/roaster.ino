@@ -31,32 +31,29 @@ dimmerLamp dimmer(outputPin, zerocross); //initialase port for dimmer for ESP826
 
 //Wifi libs 
 #include <ESP8266WiFi.h>
-#include <WebSocketsServer.h>
+#include <WebSocketsServer.h> //Websockets Lib by links2004
 
 //Thermocouple
 #include <MAX6675_Thermocouple.h> //Lib by YuriiSaliov
-#include <RunningMedian.h>
+#include <RunningMedian.h> //Lib by RobTillaart
 
 //JSON for Artisan Websocket implementation
 #include "ArduinoJson.h"
 
 //Ticker to execute actions at defined intervals
-#include "TickTwo.h"
+#include "TickTwo.h" //ESP8266 compatible version of Ticker by sstaub
  
 WebSocketsServer webSocket = WebSocketsServer(8080);
 
 //Wifi Config 
 const char *ssid     = "YOURSSID";
-const char *password = "YOURPWD";
+const char *password = "YOURPW";
 
 // Set your Static IP address
-IPAddress local_IP(192, 168, 0, 46);
+IPAddress local_IP(192, 168, 0, 47);
 // Set your Gateway IP address
 IPAddress gateway(192, 168, 0, 1);
 IPAddress subnet(255, 255, 255, 0);
- 
-unsigned long messageInterval = 5000;
-bool connected = false;
 
 //Initialize needed variables
 int DimmerVal = 0;
@@ -223,6 +220,12 @@ void setup() {
     //Initialise dimmer
     dimmer.begin(NORMAL_MODE, ON);  
   
+    // Configures static IP address
+    if (!WiFi.config(local_IP, gateway, subnet)) {
+        Serial.println("STA Failed to configure");
+    } else {
+        Serial.println("STA configured");
+      }
     WiFi.begin(ssid, password);
  
     while ( WiFi.status() != WL_CONNECTED ) {
