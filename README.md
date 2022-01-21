@@ -17,14 +17,50 @@ ESP8266 reads max6675 thermocouple values and control heating via rbdimmer.
 Currently no WifiManager implementation, if Wifi credentials change sketch needs to be modified and re-uploaded.
 
 Circuit:
-https://asciiflow.com/#/share/eJy1VttOwjAYfpWmt%2BAFm5vI3Q4iRjnE4TRmCVlCjSQOTJkLhPAWPo5P45NYGIxtPTKwabL18H%2F%2F95%2FaruA0jBBsQTT%2FbGqmOcKzcB4jPBpPoghhWIcf4ZJ8W3AVwEUAW9fmZT2AS%2FKnNTXyF6NFTAYBBBXa7%2FfPsZ0hHARTgQ7DB7c9tzhX0xM9lfUdB4Cu9WKaV0aKWVAApPD7Xdw1wYyiBQwVUjd5zn3eXiXPViSiai2QKxDFWmSz41VWW0J68mwmiaLlp1m63XvjDTb1lpPMVDCi2c%2FLX6hXi5iENQ7f8Nck5pDgWipGbaMwfkcY8FDz%2FEqVmWLLM7XszLTZ1jBdN%2FwarbPSaZOyYSg7nCC6Ty8XdCc7EGOzkZw3OY6UCTyQHUTb6lESLHe6DYPruxLkthE5dsrzq50FQwklBRG3ocviqpwACYsTayQpwz0zTTEhyh4%2FNpvkXKgRb%2Bow18azCHT6QzV8l5sb4j547gLwaLvu9mUAgOWoeuK8dt%2F1FO1UjWmpvzo06Pkjp3wjiTIxa4fnTBHroS%2B50XmNwdpyT4%2B3UGHWqfdaxmY4Ax1yvSBcUcW%2FFC%2B%2FJQFcw%2FUfNdx1ow%3D%3D)
+https://asciiflow.com/#/share/eJy1VttOwjAYfpWmt%2BAFm5vI3Q4iRjnE4TRmCVlCjSQOTJkLhPAWPo5P45NYGIxtPTKwabL18H%2F%2F95%2FaruA0jBBsQTT%2FbGqmOcKzcB4jPBpPoghhWIcf4ZJ8W3AVwEUAW9fmZT2AS%2FKnNTXyF6NFTAYBBBXa7%2FfPsZ0hHARTgQ7DB7c9tzhX0xM9lfUdB4Cu9WKaV0aKWVAApPD7Xdw1wYyiBQwVUjd5zn3eXiXPViSiai2QKxDFWmSz41VWW0J68mwmiaLlp1m63XvjDTb1lpPMVDCi2c%2FLX6hXi5iENQ7f8Nck5pDgWipGbaMwfkcY8FDz%2FEqVmWLLM7XszLTZ1jBdN%2FwarbPSaZOyYSg7nCC6Ty8XdCc7EGOzkZw3OY6UCTyQHUTb6lESLHe6DYPruxLkthE5dsrzq50FQwklBRG3ocviqpwACYsTayQpwz0zTTEhyh4%2FNpvkXKgRb%2Bow18azCHT6QzV8l5sb4j547gLwaLvu9mUAgOWoeuK8dt%2F1FO1UjWmpvzo06Pkjp3wjiTIxa4fnTBHroS%2B50XmNwdpyT4%2B3UGHWqfdaxmY4Ax1yvSBcUcW%2FFC%2B%2FJQFcw%2FUfNdx1ow%3D%3D
 
- _    _                           _____                 _   _             
-| |  | |                         |  __ \               | | (_)            
-| |__| | __ _ _ __  _ __  _   _  | |__) |___   __ _ ___| |_ _ _ __   __ _ 
-|  __  |/ _` | '_ \| '_ \| | | | |  _  // _ \ / _` / __| __| | '_ \ / _` |
-| |  | | (_| | |_) | |_) | |_| | | | \ \ (_) | (_| \__ \ |_| | | | | (_| |
-|_|  |_|\__,_| .__/| .__/ \__, | |_|  \_\___/ \__,_|___/\__|_|_| |_|\__, |
-             | |   | |     __/ |                                     __/ |
-            |_|   |_|    |___/                                     |___/ 
- 
+                                                        +---------------+          +-+
+                               5V GND              +3v3-+VCC  MAX6675   |          | |
+                                | |                     |               |          +-+
+                                | |           +---------+SCK           ++----------+ |
+                                | |           |         |               |            |
+                               ++-++          | +-------+CS             |            |
+                           +---+USB+---+      | |       |               |            |
+                           |  ESP8266  |      | |  +----+SO            -+------------+
+                           | Adafruit  |      | |  |    |               |
+                           | Feather   |      | |  | +--+GND            |
+    +---------+            |        BAT+-5V+  | |  | |  +---------------+
+    |         |       +3v3-+3V         |      | |  | v
+    | 5V   VCC+-5V+        |           |      | |  |
+    | FAN     |         +--+GND     D15+------+ |  |
+    |      GND+--+      |  |           |        |  |
+    |         |  |      v  |        D13+--------+  |
+    +---------+  v         |           |           |
+                           |        D12+-----------+    +-----------------+
+                           |           |                |                 |      From HOT
+                           |         D5+----------------+PWM  RBDDimmer  AC -------------
+                           |           |                |                IN
+                           |         D2+----------------+ZC               |
+                           |           |                |                 |
+                           +-----------+             v3-+VC              LO
+                                                        |                AD -------------
+                                                     +--+GND              |      To Heater
+                                                     |  +-----------------+
+                                                     v
+
+      _    _                                  
+     | |  | |                                 
+     | |__| | __ _ _ __  _ __  _   _          
+     |  __  |/ _` | '_ \| '_ \| | | |         
+     | |  | | (_| | |_) | |_) | |_| |         
+     |_|  |_|\__,_| .__/| .__/ \__, |         
+                  | |   | |     __/ |         
+      _____       |_|   |_| _  |___/          
+     |  __ \               | | (_)            
+     | |__) |___   __ _ ___| |_ _ _ __   __ _ 
+     |  _  // _ \ / _` / __| __| | '_ \ / _` |
+     | | \ \ (_) | (_| \__ \ |_| | | | | (_| |
+     |_|  \_\___/ \__,_|___/\__|_|_| |_|\__, |
+                                         __/ |
+                                        |___/ 
+     
