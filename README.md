@@ -15,7 +15,18 @@ This project combines Yoku-San's initial project for the "BilloJoe" and LeFish's
 Build based on BilloJoe project video, but with saxe74 & Richards variation of dimmer wiring (see Kaffe-Netz thread).
 Adafruit feather ESP8266 used to open websocket connection with Artisan.
 ESP8266 reads max6675 thermocouple values and control heating via rbdimmer.
+
 Currently no WifiManager implementation, if Wifi credentials change sketch needs to be modified and re-uploaded.
+
+## How to start?
+Change wifi credentials to our own, adjust static IP setting to your environment.
+
+Look at used libraries in sketch and import them to arudino (either via arduino library manager or via github),
+library creators are mentioned in sketch so they should be easy to find.
+If RBDDimmer does not work for your ESP8266 board, chances are high you need the modified one included in this repo (see sketch comment for more details).
+
+Built for your board and upload to esp. 
+Use Artisan configuration provided in this repo (remember to change websocket IP to IP of esp you configured).
 
 Circuit:
 https://asciiflow.com/#/share/eJy9VutugjAUfpWmf9UswmDOf1jmtkzRjI0tC4khWc1Mhi6IRGN8iz3OnsYnWQUv0JZScFnTBCg93%2BX0tLCGU8%2FHsA3x%2FKul6PoomHnzEAej94nv4wDW4ae3Itc2XLtw6cL2tX5Zd%2BGK3CkthdyFeBmSBxeCCm37%2FVO2c4Jddyrg0Bxwa5nZsZoaqUmsgxAAfeNV16%2B0BLM0QRyUCaTeCUaqUxQmykYPacdSua0oRNYtKCYQrbbIM7Ir01JIz3aHKyLr%2FDyn8dwbe7jbcanIIwVnNQfp%2BIb8fhGLMN69cbCYhDkicp2KUbvYCz9wAPJQ0%2FqovZlgF1cqncykHddOc2osZ6XzJlHDITudIarDvs5wR3sQbTeRnDgpjYyFPJA9RNewmAheOs2mlps7CjJuJI5f8vm7nQfDBEWZELOpFq2rdAFEPE28p4JteFCmSBYEnfGy1VSshXnKDD12TDP%2BNpdwB8zcahD34Ut%2Fj2Cgxr0Fepx8PJGt7s%2FGizm%2BMFCPzPoDk9SYpEnZJaT6GzogJCYtjkk06P%2BzLdlaPLbTL00ZJmHLUvQGhlk%2BOUL0Y2d%2B0SqK3rJHViybV7h35DOFgyos0TlHANzAzS%2B7WH6S
