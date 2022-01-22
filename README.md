@@ -17,10 +17,10 @@ ESP8266 reads max6675 thermocouple values and control heating via rbdimmer.
 Currently no WifiManager implementation, if Wifi credentials change sketch needs to be modified and re-uploaded.
 
 Circuit:
-https://asciiflow.com/#/share/eJy1VttOwjAYfpWmt%2BAFm5vI3Q4iRjnE4TRmCVlCjSQOTJkLhPAWPo5P45NYGIxtPTKwabL18H%2F%2F95%2FaruA0jBBsQTT%2FbGqmOcKzcB4jPBpPoghhWIcf4ZJ8W3AVwEUAW9fmZT2AS%2FKnNTXyF6NFTAYBBBXa7%2FfPsZ0hHARTgQ7DB7c9tzhX0xM9lfUdB4Cu9WKaV0aKWVAApPD7Xdw1wYyiBQwVUjd5zn3eXiXPViSiai2QKxDFWmSz41VWW0J68mwmiaLlp1m63XvjDTb1lpPMVDCi2c%2FLX6hXi5iENQ7f8Nck5pDgWipGbaMwfkcY8FDz%2FEqVmWLLM7XszLTZ1jBdN%2FwarbPSaZOyYSg7nCC6Ty8XdCc7EGOzkZw3OY6UCTyQHUTb6lESLHe6DYPruxLkthE5dsrzq50FQwklBRG3ocviqpwACYsTayQpwz0zTTEhyh4%2FNpvkXKgRb%2Bow18azCHT6QzV8l5sb4j547gLwaLvu9mUAgOWoeuK8dt%2F1FO1UjWmpvzo06Pkjp3wjiTIxa4fnTBHroS%2B50XmNwdpyT4%2B3UGHWqfdaxmY4Ax1yvSBcUcW%2FFC%2B%2FJQFcw%2FUfNdx1ow%3D%3D
+https://asciiflow.com/#/share/eJy9VutugjAUfpWmf9UswmDOf1jmtkzRjI0tC4khWc1Mhi6IRGN8iz3OnsYnWQUv0JZScFnTBCg93%2BX0tLCGU8%2FHsA3x%2FKul6PoomHnzEAej94nv4wDW4ae3Itc2XLtw6cL2tX5Zd%2BGK3CkthdyFeBmSBxeCCm37%2FVO2c4Jddyrg0Bxwa5nZsZoaqUmsgxAAfeNV16%2B0BLM0QRyUCaTeCUaqUxQmykYPacdSua0oRNYtKCYQrbbIM7Ir01JIz3aHKyLr%2FDyn8dwbe7jbcanIIwVnNQfp%2BIb8fhGLMN69cbCYhDkicp2KUbvYCz9wAPJQ0%2FqovZlgF1cqncykHddOc2osZ6XzJlHDITudIarDvs5wR3sQbTeRnDgpjYyFPJA9RNewmAheOs2mlps7CjJuJI5f8vm7nQfDBEWZELOpFq2rdAFEPE28p4JteFCmSBYEnfGy1VSshXnKDD12TDP%2BNpdwB8zcahD34Ut%2Fj2Cgxr0Fepx8PJGt7s%2FGizm%2BMFCPzPoDk9SYpEnZJaT6GzogJCYtjkk06P%2BzLdlaPLbTL00ZJmHLUvQGhlk%2BOUL0Y2d%2B0SqK3rJHViybV7h35DOFgyos0TlHANzAzS%2B7WH6S
 
                                                         +---------------+          +-+
-                               5V GND              +3v3-+VCC  MAX6675   |          | |
+                               5V GND              +3v3-+VCC  MAX6675   |          |+|
                                 | |                     |               |          +-+
                                 | |           +---------+SCK           ++----------+ |
                                 | |           |         |               |            |
@@ -29,7 +29,7 @@ https://asciiflow.com/#/share/eJy1VttOwjAYfpWmt%2BAFm5vI3Q4iRjnE4TRmCVlCjSQOTJkL
                            |  ESP8266  |      | |  +----+SO            -+------------+
                            | Adafruit  |      | |  |    |               |
                            | Feather   |      | |  | +--+GND            |
-    +---------+            |        BAT+-5V+  | |  | |  +---------------+
+    +---------+            |        USB+-5V+  | |  | |  +---------------+
     |         |       +3v3-+3V         |      | |  | v
     | 5V   VCC+-5V+        |           |      | |  |
     | FAN     |         +--+GND     D15+------+ |  |
@@ -37,16 +37,16 @@ https://asciiflow.com/#/share/eJy1VttOwjAYfpWmt%2BAFm5vI3Q4iRjnE4TRmCVlCjSQOTJkL
     |         |  |      v  |        D13+--------+  |
     +---------+  v         |           |           |
                            |        D12+-----------+    +-----------------+
-                           |           |                |                 |      From HOT
-                           |         D5+----------------+PWM  RBDDimmer  AC -------------
-                           |           |                |                IN
-                           |         D2+----------------+ZC               |
+                           |           |                |     RBDDimmer   |
+                           |         D5+----------------+PWM       AC-IN L+----- Thermofuse/ACL-IN
                            |           |                |                 |
-                           +-----------+             v3-+VC              LO
-                                                        |                AD -------------
-                                                     +--+GND              |      To Heater
-                                                     |  +-----------------+
-                                                     v
+                           |         D2+----------------+ZC        AC-IN N+----- COM
+                           |           |                |                 |
+                           +-----------+             v3-+VC               |
+                                                        |           LOAD N+----- COM
+                                                     +--+GND              |
+                                                     |  |           LOAD L+----- Heater
+                                                     v  +-----------------+
 
       _    _                                  
      | |  | |                                 
