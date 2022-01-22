@@ -12,7 +12,7 @@ This project combines Yoku-San's initial project for the "BilloJoe" and LeFish's
 * [artisan](/artisan): TBD
 
 ## How does it work?
-Build based on BilloJoe project video, but with Richards variation of dimmer wiring (see Kaffe-Netz thread).
+Build based on BilloJoe project video, but with saxe74 & Richards variation of dimmer wiring (see Kaffe-Netz thread).
 Adafruit feather ESP8266 used to open websocket connection with Artisan.
 ESP8266 reads max6675 thermocouple values and control heating via rbdimmer.
 Currently no WifiManager implementation, if Wifi credentials change sketch needs to be modified and re-uploaded.
