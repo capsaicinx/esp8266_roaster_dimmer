@@ -1,7 +1,8 @@
 # esp8266_roaster_dimmer
 Create an Artisan controlled coffe roaster out of an Klarstein VitAir hot air fryer!
 This project combines Yoku-San's initial project for the "BilloJoe" and LeFish's websocket implementation.
-* Project video and link to thread: https://www.youtube.com/watch?v=pTog0-5Rx7I
+* Project video by Yoku-San: https://www.youtube.com/watch?v=pTog0-5Rx7I
+* Kaffe-Netz.de project thread: https://www.kaffee-netz.de/threads/umbau-heissluftfritteuse-zu-artisan-gesteuertem-kaffeeroester-billojoe-v2-komplettes-tutorial.133648/
 * YokuSun initial project dropbox: https://www.dropbox.com/sh/431hbvdjr7k1vzb/AACo8r3lY0x2tSdt06G-mDh7a?dl=0
 * LeFish project: https://github.com/LeFish1/ESP8266_CoffeeRoaster 
 
