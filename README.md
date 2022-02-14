@@ -46,21 +46,20 @@ https://asciiflow.com/#/share/eJy9VutugjAUfpWmf9UswmDOf1jmtkzRjI0tC4khWc1Mhi6IRG
     |         |       +3v3-+3V         |      | |  | v
     | 5V   VCC+-5V+        |           |      | |  |
     | FAN     |         +--+GND     D15+------+ |  |
-    |      GND+--+      |  |           |        |  |
+    |      GND+--+      |  |           |        |  |                            
     |         |  |      v  |        D13+--------+  |
     +---------+  v         |           |           |
                            |        D12+-----------+    +-----------------+
                            |           |                |     RBDDimmer   |
                            |         D5+----------------+PWM       AC-IN L+----- Thermofuse/ACL-IN
                            |           |                |                 |
-                           |         D2+----------------+ZC        AC-IN N+----- COM
-                           |           |                |                 |
-                           +-----------+             v3-+VC               |
-                                                        |           LOAD N+----- COM
-                                                     +--+GND              |
+                           |         D2+----------------+ZC               |
+                           |           |                |          AC-IN N+----- COM
+                           +-----------+           +3v3-+VC               |
+                                                        |                 |
+                                                     +--+GND              |                   +
                                                      |  |           LOAD L+----- Heater
                                                      v  +-----------------+
-
       _    _                                  
      | |  | |                                 
      | |__| | __ _ _ __  _ __  _   _          
