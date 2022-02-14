@@ -9,6 +9,7 @@ This project combines Yoku-San's initial project for the "BilloJoe" and LeFish's
 ## What's inside?
 * [scr](/src): Arduino sketch for Adafruit feather ESP8266.
 * [lib](/lib): Library of RDBDimmer modified to work with Adafruit feather ESP8266. All other libraries in sketch can be downloaded via Arduino library manager.
+* [3d](/3d): STL files for 3d-printable electronics box (split in 5 parts so it can be print faster on multiple printers and glued together afterwards)
 * [artisan](/artisan): TBD
 
 ## How does it work?
