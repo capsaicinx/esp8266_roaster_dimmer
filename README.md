@@ -9,7 +9,8 @@ This project combines Yoku-San's initial project for the "BilloJoe" and LeFish's
 ## What's inside?
 * [scr](/src): Arduino sketch for Adafruit feather ESP8266.
 * [lib](/lib): Library of RDBDimmer modified to work with Adafruit feather ESP8266. All other libraries in sketch can be downloaded via Arduino library manager.
-* [3d](/3d): STL files for 3d-printable electronics box (split in 5 parts so it can be print faster on multiple printers and glued together afterwards)
+* [3d](/3d): STL files for 3d-printable electronics box (split in 5 parts so it can be print faster on multiple printers and glued together afterwards).
+* [img](/img): Pictures used in this readme.
 * [artisan](/artisan): TBD
 
 ## How does it work?
@@ -29,7 +30,16 @@ If RBDDimmer does not work for your ESP8266 board, chances are high you need the
 Built for your board and upload to esp. 
 Use Artisan configuration provided in this repo (remember to change websocket IP to IP of esp you configured).
 
-Circuit:
+## Box for electronics
+You can use the files from the [ed](/3d) folder to print as small box for the electronics.
+It was designed to be printed on multiple printer simultanously for faster production time, and then glued together. 
+![Box opened](/img/electronics)
+Route the needed cables (AC-IN L, N, Load, and termocouple) out of the back of the roaster like this:
+![Cable routing](/img/back)
+You can attach the electronics box with removable zip-ties to the back of the roaster:
+![Finished](/img/completed)
+
+## Circuit
 https://asciiflow.com/#/share/eJy9VutugjAUfpWmf9UswmDOf1jmtkzRjI0tC4khWc1Mhi6IRGN8iz3OnsYnWQUv0JZScFnTBCg93%2BX0tLCGU8%2FHsA3x%2FKul6PoomHnzEAej94nv4wDW4ae3Itc2XLtw6cL2tX5Zd%2BGK3CkthdyFeBmSBxeCCm37%2FVO2c4Jddyrg0Bxwa5nZsZoaqUmsgxAAfeNV16%2B0BLM0QRyUCaTeCUaqUxQmykYPacdSua0oRNYtKCYQrbbIM7Ir01JIz3aHKyLr%2FDyn8dwbe7jbcanIIwVnNQfp%2BIb8fhGLMN69cbCYhDkicp2KUbvYCz9wAPJQ0%2FqovZlgF1cqncykHddOc2osZ6XzJlHDITudIarDvs5wR3sQbTeRnDgpjYyFPJA9RNewmAheOs2mlps7CjJuJI5f8vm7nQfDBEWZELOpFq2rdAFEPE28p4JteFCmSBYEnfGy1VSshXnKDD12TDP%2BNpdwB8zcahD34Ut%2Fj2Cgxr0Fepx8PJGt7s%2FGizm%2BMFCPzPoDk9SYpEnZJaT6GzogJCYtjkk06P%2BzLdlaPLbTL00ZJmHLUvQGhlk%2BOUL0Y2d%2B0SqK3rJHViybV7h35DOFgyos0TlHANzAzS%2B7WH6S
 
                                                         +---------------+          +-+
